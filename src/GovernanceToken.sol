@@ -6,19 +6,8 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
 
-/**
- * @title GovernanceToken
- * @dev Токен управления с поддержкой делегирования (Votes) и безгазовых аппрувов (Permit)
- */
 contract GovernanceToken is ERC20, ERC20Permit, ERC20Votes {
     
-    /**
-     * @param initialSupply Общее количество токенов (например, 1 000 000 * 10**18)
-     * @param teamVesting Адрес контракта TokenVesting.sol
-     * @param treasury Адрес казначейства DAO
-     * @param communityAirdrop Адрес для распределения аирдропа
-     * @param liquidity Адрес для обеспечения ликвидности (DEX)
-     */
     constructor(
         uint256 initialSupply,
         address teamVesting,
@@ -40,10 +29,6 @@ contract GovernanceToken is ERC20, ERC20Permit, ERC20Votes {
     }
 
 
-    /**
-     * @dev Функция _update вызывается при любых переводах токенов.
-     * Она обновляет балансы и веса голосов.
-     */
     function _update(address from, address to, uint256 value)
         internal
         override(ERC20, ERC20Votes)
@@ -51,9 +36,6 @@ contract GovernanceToken is ERC20, ERC20Permit, ERC20Votes {
         super._update(from, to, value);
     }
 
-    /**
-     * @dev Возвращает текущий порядковый номер подписи (nonce) для EIP-712 (Permit).
-     */
     function nonces(address owner)
         public
         view
