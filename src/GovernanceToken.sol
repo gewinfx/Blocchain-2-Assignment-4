@@ -4,6 +4,7 @@ pragma solidity ^0.8.20;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
+import "@openzeppelin/contracts/utils/Nonces.sol";
 
 contract GovernanceToken is ERC20, ERC20Permit, ERC20Votes {
     
@@ -17,16 +18,11 @@ contract GovernanceToken is ERC20, ERC20Permit, ERC20Votes {
         ERC20("Governance Token", "GTK") 
         ERC20Permit("Governance Token") 
     {
-        
         _mint(teamVesting, (initialSupply * 40) / 100);
-        
         _mint(treasury, (initialSupply * 30) / 100);
-        
         _mint(communityAirdrop, (initialSupply * 20) / 100);
-        
         _mint(liquidity, (initialSupply * 10) / 100);
     }
-
 
     function _update(address from, address to, uint256 value)
         internal

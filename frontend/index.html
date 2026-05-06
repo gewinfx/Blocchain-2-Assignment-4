@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAO Governance dApp</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; padding: 20px; color: #333; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .card { border: 1px solid #e1e4e8; padding: 20px; margin-bottom: 20px; border-radius: 8px; background-color: #fafbfc; }
+        button { padding: 10px 15px; cursor: pointer; background-color: #0366d6; color: white; border: none; border-radius: 5px; font-weight: bold; }
+        button:hover { background-color: #005cc5; }
+        button:disabled { background-color: #959da5; cursor: not-allowed; }
+        input { padding: 10px; margin-right: 10px; width: calc(100% - 22px); margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; }
+        .row { display: flex; gap: 10px; }
+        .row button { flex: 1; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>DAO Governance Interface</h1>
+        
+        <div class="card">
+            <h3>1. Wallet Connection</h3>
+            <button id="connectWalletBtn">Connect MetaMask</button>
+            <p><strong>Status:</strong> <span id="walletStatus">Disconnected</span></p>
+            <p><strong>Address:</strong> <span id="walletAddress">-</span></p>
+        </div>
+
+        <div class="card">
+            <h3>2. Token Info & Delegation</h3>
+            <p><strong>Balance:</strong> <span id="tokenBalance">0</span> Tokens</p>
+            <p><strong>Voting Power:</strong> <span id="votingPower">0</span> Votes</p>
+            <p><strong>Current Delegate:</strong> <span id="currentDelegate">-</span></p>
+            <input type="text" id="delegateAddress" placeholder="Enter address to delegate (0x...)">
+            <button id="delegateBtn" disabled>Delegate Votes</button>
+        </div>
+
+        <div class="card">
+            <h3>3. View & Vote on Proposal</h3>
+            <input type="text" id="proposalIdInput" placeholder="Enter Proposal ID (uint256)">
+            <button id="fetchProposalBtn" disabled>Fetch Proposal Info</button>
+            
+            <div id="proposalDetails" style="margin-top: 15px; display: none;">
+                <p><strong>State:</strong> <span id="propState">-</span></p>
+                <p><strong>Votes For:</strong> <span id="votesFor">0</span></p>
+                <p><strong>Votes Against:</strong> <span id="votesAgainst">0</span></p>
+                <p><strong>Votes Abstain:</strong> <span id="votesAbstain">0</span></p>
+                
+                <div class="row" style="margin-top: 15px;">
+                    <button id="voteForBtn" style="background-color: #28a745;">Vote FOR</button>
+                    <button id="voteAgainstBtn" style="background-color: #dc3545;">Vote AGAINST</button>
+                    <button id="voteAbstainBtn" style="background-color: #6c757d;">ABSTAIN</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ethers.js v6 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
